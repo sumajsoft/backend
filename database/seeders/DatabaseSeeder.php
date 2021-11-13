@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Convocatoria;
+use App\Models\GrupoEmpresa;
 
 class DatabaseSeeder extends Seeder
 {
@@ -47,5 +48,12 @@ class DatabaseSeeder extends Seeder
         $c4->gestion = "2019";
         $c4->archivo = 'imagenes/daniel.png';
         $c4->save();
+
+        $ge1 = new GrupoEmpresa();
+        $ge1->nombreCorto = "Sumajsoft";
+        $ge1->nombreLargo = "Sumajsoft S.R.L.";
+        $ge1->fecha = "10-10-2020";
+        $ge1->tipoSociedad = "Sociedad Anonima";
+        $ge1->save();
     }
 }
