@@ -32,15 +32,24 @@ class GrupoEmpresaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
-      $grupoEmpresa = new GrupoEmpresa();
-      $grupoEmpresa->nombreCorto = $request->nombreCorto;
-      $grupoEmpresa->nombreLargo = $request->nombreLargo;
-      $grupoEmpresa->fecha       = $request->fecha;
-      $grupoEmpresa->tipoSociedad = $request->tipoSociedad;
-      $grupoEmpresa->save();
-      return response()->json([
-        "sePudo" => True
-      ]);
+      $nombreCorto = $request->nombreCorto;
+      $geBusc = GrupoEmpresa::where('nombreCorto','=',$nombreCorto)->first();
+      if(isset($geBusc)){
+        return response()->json([
+          "sePudo" => False
+        ]);
+      }
+      else{
+        $grupoEmpresa = new GrupoEmpresa();
+        $grupoEmpresa->nombreCorto = $request->nombreCorto;
+        $grupoEmpresa->nombreLargo = $request->nombreLargo;
+        $grupoEmpresa->fecha       = $request->fecha;
+        $grupoEmpresa->tipoSociedad = $request->tipoSociedad;
+        $grupoEmpresa->save();
+        return response()->json([
+          "sePudo" => True
+        ]);
+      }
     }
 
     /**
