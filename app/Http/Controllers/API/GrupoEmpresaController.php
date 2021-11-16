@@ -22,9 +22,7 @@ class GrupoEmpresaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create(){
     }
 
     /**
@@ -33,9 +31,16 @@ class GrupoEmpresaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request){
+      $grupoEmpresa = new GrupoEmpresa();
+      $grupoEmpresa->nombreCorto = $request->nombreCorto;
+      $grupoEmpresa->nombreLargo = $request->nombreLargo;
+      $grupoEmpresa->fecha       = $request->fecha;
+      $grupoEmpresa->tipoSociedad = $request->tipoSociedad;
+      $grupoEmpresa->save();
+      return response()->json([
+        "sePudo" => True
+      ]);
     }
 
     /**
@@ -44,9 +49,7 @@ class GrupoEmpresaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show($id){
     }
 
     /**
@@ -55,9 +58,7 @@ class GrupoEmpresaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit($id){
     }
 
     /**
@@ -67,9 +68,16 @@ class GrupoEmpresaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, $id){
+      $grupoEmpresa = GrupoEmpresa::find($id);
+      $grupoEmpresa->nombreCorto = $request->nombreCorto;
+      $grupoEmpresa->nombreLargo = $request->nombreLargo;
+      $grupoEmpresa->fecha = $request->fecha;
+      $grupoEmpresa->tipoSociedad = $request->tipoSociedad;
+      $grupoEmpresa->save();
+      return response()->json([
+        "sePudo" => True
+      ]);
     }
 
     /**
@@ -78,8 +86,6 @@ class GrupoEmpresaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id){
     }
 }

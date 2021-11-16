@@ -22,8 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('convocatorias', [ConvocatoriaController::class,'index']);
 Route::post('convocatorias',[ConvocatoriaController::class,'store']);
-Route::put('convocatorias/{id}', [ConvocatoriaController::class,'store']);
+Route::put('convocatorias/{id}', [ConvocatoriaController::class,'update']);
 
 Route::get('grupo-empresas', [GrupoEmpresaController::class,'index']);
 Route::post('grupo-empresas',[GrupoEmpresaController::class,'store']);
-Route::put('grupo-empresas/{id}', [GrupoEmpresaController::class,'store']);
+Route::put('grupo-empresas/{id}', [GrupoEmpresaController::class,'update']);
