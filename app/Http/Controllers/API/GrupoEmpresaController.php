@@ -29,7 +29,7 @@ class GrupoEmpresaController extends Controller{
       $geBusc = GrupoEmpresa::where('nombreCorto','=',$nombreCorto)->first();
       if(isset($geBusc)){
         return response()->json([
-          "sePudo" => False
+          "message"=>"Ya existe una Grupo empresa con el mismo nombre"
         ]);
       }
       else{
@@ -45,7 +45,7 @@ class GrupoEmpresaController extends Controller{
         }
         $grupoEmpresa->save();
         return response()->json([
-          "sePudo" => True
+          "message" => "Se ha creado una nueava Grupo Empres"a
         ]);
       }
     }
@@ -75,12 +75,23 @@ class GrupoEmpresaController extends Controller{
       $grupoEmpresa->tipoSociedad = $request->tipoSociedad;
       $grupoEmpresa->direccion = $request->direccion;
       $grupoEmpresa->email = $request->email;
-      $grupoEmpresa->telefono = $request->telefono;
-      $grupoEmpresa->nombreSocio1 = $request->nombreSocio1;
-      $grupoEmpresa->nombreSocio2 = $request->nombreSocio2;
-      $grupoEmpresa->nombreSocio3 = $request->nombreSocio3;
-      $grupoEmpresa->nombreSocio4 = $request->nombreSocio4;
-      $grupoEmpresa->nombreSocio5 = $request->nombreSocio5;
+      $grupoEmpre1sa->telefono = $request->telefono;
+      if(isset($request->nombreSocio1)){
+        $grupoEmpresa->nombreSocio1 = $request->nombreSocio1;
+      }
+      if(isset($request->nombreSocio2)){
+        $grupoEmpresa->nombreSocio2 = $request->nombreSocio2;
+      }
+      if(isset($request->nombreSocio3)){
+        $grupoEmpresa->nombreSocio3 = $request->nombreSocio3;
+      }
+      if(isset($request->nombreSocio4)){
+        $grupoEmpresa->nombreSocio4 = $request->nombreSocio4;
+      }
+      if(isset($request->nombreSocio5)){
+        $grupoEmpresa->nombreSocio5 = $request->nombreSocio5;
+      }
+      
       
       $logo = $request->file('archivo');
       if($logo !== null){

@@ -14,7 +14,6 @@ class ConvocatoriaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-      // return response()->download(storage_path('app/public/files/AAAContratoSUMAJ.pdf'));
       return Convocatoria::all();
     }
 
@@ -38,7 +37,8 @@ class ConvocatoriaController extends Controller
       }
       $nuevaConv->save();
       return response()->json([
-        'sePudo' => True
+        'message'=>'Se ha creado una convocatoria.',
+        'data' => $nuevaConv
       ]);
     }
 
