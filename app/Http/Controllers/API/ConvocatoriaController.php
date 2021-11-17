@@ -29,7 +29,7 @@ class ConvocatoriaController extends Controller
       $nuevaConv->codigo = $request->codigo;
       $nuevaConv->semestre = $request->semestre;
       $nuevaConv->gestion = $request->gestion;
-      $nuevaConv->validoHasta = $request->validoHasta;
+      $nuevaConv->fechaPublicacion = $request->fechaPublicacion;
       $pdf = $request->file('archivo');
       if($pdf !== null){
         $path = $pdf->store('public/files');

@@ -16,10 +16,10 @@ class CreateConvocatoriaTable extends Migration
         Schema::create('convocatoria', function (Blueprint $table) {
             $table->id();
             $table->string("titulo",30);
-            $table->string("codigo",30);
-            $table->string("semestre",1);
-            $table->string("gestion",4);
-            $table->dateTime('validoHasta');
+            $table->string("codigo",30)->nullable();
+            $table->string("semestre",1)->nullable();
+            $table->string("gestion",4)->nullable();
+            $table->string('fechaPublicacion')->nullable();
             $table->string('pdfPath')->nullable();
             $table->timestamps();
         });
