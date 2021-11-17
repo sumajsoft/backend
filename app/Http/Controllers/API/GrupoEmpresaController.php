@@ -36,7 +36,7 @@ class GrupoEmpresaController extends Controller{
         $grupoEmpresa = new GrupoEmpresa();
         $grupoEmpresa->nombreCorto = $request->nombreCorto;
         $grupoEmpresa->nombreLargo = $request->nombreLargo;
-        $grupoEmpresa->fecha       = $request->fecha;
+        $grupoEmpresa->fechaCreacion= $request->fechaCreacion;
         $grupoEmpresa->tipoSociedad = $request->tipoSociedad;
         $logo = $request->file('archivo');
         if($logo !== null){
