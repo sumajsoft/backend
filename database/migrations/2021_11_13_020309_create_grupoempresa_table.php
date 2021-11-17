@@ -17,7 +17,7 @@ class CreateGrupoEmpresaTable extends Migration
             $table->id();
             $table->string("nombreCorto")->unique();
             $table->string("nombreLargo");
-            $table->string("fechaCreaicon");
+            $table->string("fechaCreacion");
             $table->string("tipoSociedad");
             $table->string('direccion')->nullable();
             $table->string('email')->nullable();
