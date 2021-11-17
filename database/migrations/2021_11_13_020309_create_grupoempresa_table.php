@@ -15,10 +15,19 @@ class CreateGrupoEmpresaTable extends Migration
     {
         Schema::create('grupoempresa', function (Blueprint $table) {
             $table->id();
-            $table->string("nombreCorto");
+            $table->string("nombreCorto")->unique();
             $table->string("nombreLargo");
-            $table->string("fecha");
-            $table->string("tipoSociedad");
+            $table->string("fecha")->nullable();
+            $table->string("tipoSociedad")->nullable();
+            $table->string('direccion')->nullable();
+            $table->string('email')->nullable();
+            $table->string('telefono')->nullable();
+            $table->string('nombreSocio1')->nullable();
+            $table->string('nombreSocio2')->nullable();
+            $table->string('nombreSocio3')->nullable();
+            $table->string('nombreSocia4')->nullable();
+            $table->string('nombreSocio5')->nullable();
+            $table->string('logoPath')->nullable();
             $table->timestamps();
         });
     }

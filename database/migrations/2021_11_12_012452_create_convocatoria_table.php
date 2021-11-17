@@ -19,7 +19,8 @@ class CreateConvocatoriaTable extends Migration
             $table->string("codigo",30);
             $table->string("semestre",1);
             $table->string("gestion",4);
-            $table->string("archivo",50);
+            $table->dateTime('validoHasta');
+            $table->string('pdfPath')->nullable();
             $table->timestamps();
         });
     }

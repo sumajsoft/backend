@@ -14,7 +14,8 @@ class ConvocatoriaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        return Convocatoria::all();
+      // return response()->download(storage_path('app/public/files/AAAContratoSUMAJ.pdf'));
+      return Convocatoria::all();
     }
 
     /**
@@ -29,7 +30,12 @@ class ConvocatoriaController extends Controller
       $nuevaConv->codigo = $request->codigo;
       $nuevaConv->semestre = $request->semestre;
       $nuevaConv->gestion = $request->gestion;
-      $nuevaConv->archivo = $request->archivo;
+      $nuevaConv->validoHasta = $request->validoHasta;
+      $pdf = $request->file('archivo');
+      if($pdf !== null){
+        $path = $pdf->store('public/files');
+        $nuevaConv->pdfPath = $path;
+      }
       $nuevaConv->save();
       return response()->json([
         'sePudo' => True
@@ -42,9 +48,9 @@ class ConvocatoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show($id){
+      $conv = Convocatoria::find($id);
+      return $conv;
     }
 
     /**
@@ -65,6 +71,14 @@ class ConvocatoriaController extends Controller
       return response()->json([
         "sePudo" => True
       ]);
+    }
+
+    /**
+     * Retorna el archivo con respecto a este recurso, en convocatoria es el pdf (IPTIS)
+     */
+    public function getArchivo($id){
+      $convocatoria = Convocatoria::find($id);
+      return response()->download(storage_path('app/'.$convocatoria->pdfPath));
     }
 
     /**
