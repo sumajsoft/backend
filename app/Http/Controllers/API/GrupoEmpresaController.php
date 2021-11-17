@@ -45,7 +45,7 @@ class GrupoEmpresaController extends Controller{
         }
         $grupoEmpresa->save();
         return response()->json([
-          "message" => "Se ha creado una nueava Grupo Empres"a
+          "message" => "Se ha creado una nueava Grupo Empresa"
         ]);
       }
     }
