@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Convocatoria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ConvocatoriaController extends Controller
 {
@@ -62,11 +63,34 @@ class ConvocatoriaController extends Controller
      */
     public function update(Request $request, $id){
       $conv = Convocatoria::find($id);
-      $conv->titulo = $request->titulo;
-      $conv->codigo = $request->codigo;
-      $conv->semestre = $request->semestre;
-      $conv->gestion = $request->gestion;
-      $conv->archivo = $request->archivo;
+      if(isset($request->titulo)){
+        $conv->titulo = $request->titulo;
+      }
+      if(isset($request->codigo)){
+        $conv->codigo = $request->codigo;
+      }
+      if(isset($request->semestre)){
+        $conv->semestre = $request->semestre;
+      }
+      if(isset($request->gestion)){
+        $conv->gestion = $request->gestion;
+      }
+      if(isset($request->gestion)){
+        $conv->fechaPublicacion = $request->fechaPublicacion;
+      }
+      $pdf = $request->file('archivo');
+      if(isset($pdf)){
+        $lastPath = $conv->pdfPath;
+        if(Storage::exists($lastPath)){
+          Storage::delete($lastPath);
+          $newPath = $pdf->store('public/files');
+          $conv->pdfPath = $newPath;
+        }
+        else{
+          $path = $pdf->store('public/files');
+          $conv->pdfPath = $path;
+        }
+      }
       $conv->save();
       return response()->json([
         "sePudo" => True
@@ -78,7 +102,12 @@ class ConvocatoriaController extends Controller
      */
     public function getArchivo($id){
       $convocatoria = Convocatoria::find($id);
-      return response()->download(storage_path('app/'.$convocatoria->pdfPath));
+      if(Storage::exists($convocatoria->pdfPath)){
+        return response()->download(storage_path('app/'.$convocatoria->pdfPath));
+      }
+      else{
+        return response()->json(['message'=>"No existe el archivo especificado"]);
+      }
     }
 
     /**

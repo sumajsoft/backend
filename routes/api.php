@@ -26,7 +26,7 @@ Route::get('convocatorias', [ConvocatoriaController::class,'index']);
 Route::get('convocatorias/{id}',[ConvocatoriaController::class,'show']);
 Route::get('convocatorias/file/{id}',[ConvocatoriaController::class,'getArchivo']);
 Route::post('convocatorias',[ConvocatoriaController::class,'store']);
-Route::put('convocatorias/{id}', [ConvocatoriaController::class,'update']);
+Route::post('convocatorias/{id}', [ConvocatoriaController::class,'update']);
 
 Route::get('grupo-empresas', [GrupoEmpresaController::class,'index']);
 Route::get('grupo-empresas/{id}', [GrupoEmpresaController::class,'show']);

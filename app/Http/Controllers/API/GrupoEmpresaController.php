@@ -75,7 +75,7 @@ class GrupoEmpresaController extends Controller{
       $grupoEmpresa->tipoSociedad = $request->tipoSociedad;
       $grupoEmpresa->direccion = $request->direccion;
       $grupoEmpresa->email = $request->email;
-      $grupoEmpre1sa->telefono = $request->telefono;
+      $grupoEmpresa->telefono = $request->telefono;
       if(isset($request->nombreSocio1)){
         $grupoEmpresa->nombreSocio1 = $request->nombreSocio1;
       }

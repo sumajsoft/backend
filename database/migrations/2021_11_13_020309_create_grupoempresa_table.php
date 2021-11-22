@@ -26,7 +26,7 @@ class CreateGrupoEmpresaTable extends Migration
             $table->string('nombreSocio2')->nullable();
             $table->string('nombreSocio3')->nullable();
             $table->string('nombreSocio4')->nullable();
-            $table->string('nombreSocia5')->nullable();
+            $table->string('nombreSocio5')->nullable();
             $table->string('logoPath')->nullable();
             $table->timestamps();
         });
