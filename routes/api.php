@@ -32,4 +32,4 @@ Route::get('grupo-empresas', [GrupoEmpresaController::class,'index']);
 Route::get('grupo-empresas/{id}', [GrupoEmpresaController::class,'show']);
 Route::get('grupo-empresas/file/{id}',[GrupoEmpresaController::class,'getArchivo']);
 Route::post('grupo-empresas',[GrupoEmpresaController::class,'store']);
-Route::put('grupo-empresas/{id}', [GrupoEmpresaController::class,'update']);
+Route::post('grupo-empresas/{id}', [GrupoEmpresaController::class,'update']);

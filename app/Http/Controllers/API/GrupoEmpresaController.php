@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Models\GrupoEmpresa;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
 
 class GrupoEmpresaController extends Controller{
     /**
@@ -69,13 +69,15 @@ class GrupoEmpresaController extends Controller{
      */
     public function update(Request $request, $id){
       $grupoEmpresa = GrupoEmpresa::find($id);
-      $grupoEmpresa->nombreCorto = $request->nombreCorto;
-      $grupoEmpresa->nombreLargo = $request->nombreLargo;
-      $grupoEmpresa->fecha = $request->fecha;
-      $grupoEmpresa->tipoSociedad = $request->tipoSociedad;
-      $grupoEmpresa->direccion = $request->direccion;
-      $grupoEmpresa->email = $request->email;
-      $grupoEmpresa->telefono = $request->telefono;
+      if(isset($request->direccion)){
+        $grupoEmpresa->direccion = $request->direccion;
+      }
+      if(isset($request->email)){
+        $grupoEmpresa->email = $request->email;
+      }
+      if(isset($request->telefono)){
+        $grupoEmpresa->telefono = $request->telefono;        
+      }
       if(isset($request->nombreSocio1)){
         $grupoEmpresa->nombreSocio1 = $request->nombreSocio1;
       }
@@ -91,12 +93,18 @@ class GrupoEmpresaController extends Controller{
       if(isset($request->nombreSocio5)){
         $grupoEmpresa->nombreSocio5 = $request->nombreSocio5;
       }
-      
-      
       $logo = $request->file('archivo');
-      if($logo !== null){
-        $path = $logo->store('public/files');
-        $grupoEmpresa->logoPath = $path;
+      if(isset($logo)){
+        $lastPath = $grupoEmpresa->logoPath;
+        if(Storage::exists($lastPath)){
+          Storage::delete($lastPath);
+          $path = $logo->store('public/files');
+          $grupoEmpresa->logoPath = $path;
+        }
+        else{
+          $path = $logo->store('public/files');
+          $grupoEmpresa->logoPath = $path;
+        }
       }
       $grupoEmpresa->save();
       return response()->json([
