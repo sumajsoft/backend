@@ -43,7 +43,6 @@ class GrupoEmpresaController extends Controller{
           $path = $logo->store('public/files');
           $grupoEmpresa->logoPath = $path;
         }
-        $grupoEmpresa->save();
         return response()->json([
           "message" => "Se ha creado una nueava Grupo Empresa"
         ]);
@@ -118,6 +117,24 @@ class GrupoEmpresaController extends Controller{
     public function getArchivo($id){
       $ge = GrupoEmpresa::find($id);
       return response()->download(storage_path('app/'.$ge->logoPath));
+    }
+
+    /**
+     * Retorna un response con message y verificar si el nombre corto en el req ya existe o no
+     */
+    public function verificarNombreCorto(Request $request){
+      $nombreCorto = strtolower($request->nombreCorto);
+      $buscado = GrupoEmpresa::where('nombreCorto',$nombreCorto)->first();
+      if(isset($buscado)){
+        return response()->json([
+          "message"=>"Nombre corto no disponible"
+        ]);
+      }
+      else{
+        return response()->json([
+          "message"=>"Nombre corto disponible"
+        ]);
+      }
     }
 
     /**
