@@ -25,7 +25,7 @@ class GrupoEmpresaController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
-      $nombreCorto = $request->nombreCorto;
+      $nombreCorto = strtolower($request->nombreCorto);
       $geBusc = GrupoEmpresa::where('nombreCorto','=',$nombreCorto)->first();
       if(isset($geBusc)){
         return response()->json([
@@ -34,7 +34,7 @@ class GrupoEmpresaController extends Controller{
       }
       else{
         $grupoEmpresa = new GrupoEmpresa();
-        $grupoEmpresa->nombreCorto = $request->nombreCorto;
+        $grupoEmpresa->nombreCorto = $nombreCorto;
         $grupoEmpresa->nombreLargo = $request->nombreLargo;
         $grupoEmpresa->fechaCreacion= $request->fechaCreacion;
         $grupoEmpresa->tipoSociedad = $request->tipoSociedad;
