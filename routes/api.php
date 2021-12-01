@@ -33,3 +33,5 @@ Route::get('grupo-empresas/{id}', [GrupoEmpresaController::class,'show']);
 Route::get('grupo-empresas/file/{id}',[GrupoEmpresaController::class,'getArchivo']);
 Route::post('grupo-empresas',[GrupoEmpresaController::class,'store']);
 Route::post('grupo-empresas/{id}', [GrupoEmpresaController::class,'update']);
+
+Route::post('verificar-nombreCorto',[GrupoEmpresaController::class,'verificarNombreCorto']);
