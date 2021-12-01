@@ -43,6 +43,7 @@ class GrupoEmpresaController extends Controller{
           $path = $logo->store('public/files');
           $grupoEmpresa->logoPath = $path;
         }
+        $grupoEmpresa->save();
         return response()->json([
           "message" => "Se ha creado una nueava Grupo Empresa"
         ]);
