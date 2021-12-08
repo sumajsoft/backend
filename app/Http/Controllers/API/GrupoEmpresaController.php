@@ -45,7 +45,7 @@ class GrupoEmpresaController extends Controller{
         }
         $grupoEmpresa->save();
         return response()->json([
-          "message" => "Se ha creado una nueava Grupo Empresa"
+          "message" => "Se ha creado una nueva Grupo Empresa"
         ]);
       }
     }
@@ -144,5 +144,9 @@ class GrupoEmpresaController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function destroy($id){
+    }
+
+    public function getGrupoEmpresa(){
+      return response()->json(GrupoEmpresa::all(),200);
     }
 }

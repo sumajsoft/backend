@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Convocatoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class ConvocatoriaController extends Controller
 {
@@ -15,7 +16,17 @@ class ConvocatoriaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-      return Convocatoria::all();
+       return Convocatoria::all();
+    }
+
+    public function nopublicadas(){
+      $convocatoria = \DB::table('convocatoria')//->select('convocatoria.*')
+                        ->where('fechaPublicacion',null)
+                        ->orderBy('created_at','DESC')
+                        ->get();
+        return response()->json([
+          'data' => $convocatoria
+        ]);
     }
 
     /**

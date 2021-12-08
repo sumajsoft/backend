@@ -11,4 +11,6 @@ class GrupoEmpresa extends Model
     
     protected $table = 'grupoempresa';
     protected $hidden = ['created_at','updated_at'];
+    protected $fillable = ['id','nombreCorto',
+    'nombreLargo','fechaCreacion','tipoSociedad','direccion','email','telefono','nombreSocio1','nombreSocio2','nombreSocio3','nombreSocio4','nombreSocio5','logoPath'];
 }

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Convocatoria;
 use App\Models\GrupoEmpresa;
+use Prophecy\Call\Call;
 
 class DatabaseSeeder extends Seeder
 {
@@ -55,5 +56,26 @@ class DatabaseSeeder extends Seeder
         // $ge1->fecha = "10-10-2020";
         // $ge1->tipoSociedad = "Sociedad Anonima";
         // $ge1->save();
+
+        //$ge = new GrupoEmpresa();
+       // $ge->id();
+        //$ge->nombreCorto= "asdf";
+        //$ge->nombreLargo="asdfg";
+        //$ge->fechaCreacion="asdfg";
+        //$ge->tipoSociedad="asdfg";
+        //$ge->direccion="asdfg";
+        //$ge->email="asdfg";
+        //$ge->telefono="asdfg";
+        //$ge->nombreSocio1="asdfg";
+        //$ge->nombreSocio2="asdfg";
+        //$ge->nombreSocio3="asdfg";
+        //$ge->nombreSocio4="asdfg";
+        //$ge->nombreSocio5="asdfg";
+        //$ge->logoPath="asdfg";
+        //$ge->save();
+
+        $this->Call(GrupoEmpresaSeeder::class);
+
+
     }
 }
