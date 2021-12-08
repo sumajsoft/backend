@@ -20,8 +20,9 @@ class ConvocatoriaController extends Controller
     }
 
     public function nopublicadas(){
-      $convocatoria = \DB::table('convocatoria')//->select('convocatoria.*')
+      $convocatoria = \DB::table('convocatoria')//->select('titulo','codigo','semestre','pdfPath')
                         ->where('fechaPublicacion',null)
+                        ->select('titulo','codigo','semestre','pdfPath')
                         ->orderBy('created_at','DESC')
                         ->get();
         return response()->json([
