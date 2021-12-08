@@ -17,7 +17,7 @@ class ConvocatoriaController extends Controller
     public function index(){
       return Convocatoria::all();
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *
