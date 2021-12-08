@@ -13,7 +13,7 @@ class GrupoEmpresaSeeder extends Seeder
      */
     public function run()
     {
-        GrupoEmpresa::factory(50)->create();
+        GrupoEmpresa::factory(10)->create();
 
         /*$ge = new GrupoEmpresa();
 
