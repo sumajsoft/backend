@@ -14,8 +14,8 @@ class GrupoEmpresaController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function index(){
-      $grupoEmpresas = GrupoEmpresa::all();
-      return $grupoEmpresas;
+      $grupoEmpresas = GrupoEmpresa::paginate(10);
+        return response()->json($grupoEmpresas, 200);
     }
 
     /**
@@ -76,7 +76,7 @@ class GrupoEmpresaController extends Controller{
         $grupoEmpresa->email = $request->email;
       }
       if(isset($request->telefono)){
-        $grupoEmpresa->telefono = $request->telefono;        
+        $grupoEmpresa->telefono = $request->telefono;
       }
       if(isset($request->nombreSocio1)){
         $grupoEmpresa->nombreSocio1 = $request->nombreSocio1;

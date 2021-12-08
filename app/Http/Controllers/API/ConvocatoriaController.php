@@ -24,10 +24,9 @@ class ConvocatoriaController extends Controller
                         ->where('fechaPublicacion',null)
                         ->select('titulo','codigo','semestre','pdfPath')
                         ->orderBy('created_at','DESC')
-                        ->get();
-        return response()->json([
-          'data' => $convocatoria
-        ]);
+                        ->paginate(10);
+        return response()->json($convocatoria, 200);
+
     }
 
     /**
