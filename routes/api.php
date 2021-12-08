@@ -4,6 +4,7 @@ use App\Http\Controllers\API\ConvocatoriaController;
 use App\Http\Controllers\API\GrupoEmpresaController;
 use App\Models\Convocatoria;
 use App\Models\GrupoEmpresa;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,33 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('login',function(Request $request){
+  $username = $request->username;
+  $password = $request->password;
+  $user = User::where('username','=',$username)->first();
+  if(isset($user)){
+    if($user->password == $password){
+      $role = $user->role;
+      return response()->json([
+        "message"=>"Inicio de sesion hecho",
+        "username"=>$username,
+        "role"=>$role
+      ]);
+    }
+    else{
+      return response()->json([
+        "message"=>"Contrasenha del usuario ".$username." incorrecta"
+      ]);
+    }
+  }
+  else{
+    return response()->json([
+      "message" => "Nombre de usuario o contrasenha incorrectos"
+    ]);
+  }
+});
+
 
 Route::get('convocatorias', [ConvocatoriaController::class,'index']);
 Route::get('convocatorias/{id}',[ConvocatoriaController::class,'show']);
