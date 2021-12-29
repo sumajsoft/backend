@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Storage;
 
 class ConvocatoriaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth.role:admin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +21,7 @@ class ConvocatoriaController extends Controller
     public function index(){
       return Convocatoria::all();
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *

@@ -7,6 +7,7 @@ use App\Models\GrupoEmpresa;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+/*
 Route::post('login',function(Request $request){
   $username = $request->username;
   $password = $request->password;
@@ -48,9 +49,8 @@ Route::post('login',function(Request $request){
     ]);
   }
 });
+*/
 
-
-Route::get('convocatorias', [ConvocatoriaController::class,'index']);
 Route::get('convocatorias/{id}',[ConvocatoriaController::class,'show']);
 Route::get('convocatorias/file/{id}',[ConvocatoriaController::class,'getArchivo']);
 Route::post('convocatorias',[ConvocatoriaController::class,'store']);
@@ -63,3 +63,13 @@ Route::post('grupo-empresas',[GrupoEmpresaController::class,'store']);
 Route::post('grupo-empresas/{id}', [GrupoEmpresaController::class,'update']);
 
 Route::post('verificar-nombreCorto',[GrupoEmpresaController::class,'verificarNombreCorto']);
+
+Route::post('login', [ApiController::class, 'authenticate']);
+Route::post('register', [ApiController::class, 'register']);
+Route::get('convocatorias', [ ConvocatoriaController::class,'index']);
+
+Route::group(['middleware' => ['jwt.verify']], function() {
+    Route::get('logout', [ApiController::class, 'logout']);
+    Route::get('get_user', [ApiController::class, 'get_user']);
+
+});
