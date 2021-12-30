@@ -35,7 +35,7 @@ Route::post('grupo-empresas',[GrupoEmpresaController::class,'store']);
 Route::post('grupo-empresas/{id}', [GrupoEmpresaController::class,'update']);
 
 Route::get('convocatorias-no-publicadas', [ConvocatoriaController::class,'nopublicadas']);
-Route::put('convocatoriaspublicar/{id}', [ConvocatoriaController::class,'publicarConvocatoria']);
+Route::get('convocatorias/publicar/{id}', [ConvocatoriaController::class,'publicarConvocatoria']);
 Route::get('convocatorias-publicadas', [ConvocatoriaController::class,'publicadas']);
 
 //Route::get('getGrupoEmpresa','\App\Http\Controllers\API\GrupoEmpresaController@getGrupoEmpresa');

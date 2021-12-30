@@ -24,7 +24,6 @@ class ConvocatoriaController extends Controller
     public function nopublicadas(){
       $convocatoria = \DB::table('convocatoria')//->select('titulo','codigo','semestre','pdfPath')
                         ->where('fechaPublicacion',null)
-                        ->select('titulo','codigo','semestre','pdfPath','fechaPublicacion')
                         ->orderBy('created_at','DESC')
                         ->paginate(10);
         return response()->json($convocatoria, 200);
@@ -38,7 +37,8 @@ class ConvocatoriaController extends Controller
      */
     public function publicarConvocatoria(Request $request, $id){
       $convocatoria = Convocatoria::find($id);
-      $properties = array("titulo", "codigo", "semestre", "gestion", "pdfPath");
+//      $properties = array("titulo", "codigo", "semestre", "gestion", "pdfPath");
+      $properties = array("titulo");
       foreach ($properties as &$item) {
           error_log('$item');
           error_log($convocatoria[$item]);
@@ -48,11 +48,12 @@ class ConvocatoriaController extends Controller
             ], 400);
           }
       }
-      $now = Carbon::now();
+      $now = Carbon::now('UTC');
       $convocatoria->fechaPublicacion= $now->toDateTimeString();
       $convocatoria->save();
       return response()->json([
-        "message" => 'se ha publicado una convocatoria'
+        "message" => 'se ha publicado una convocatoria',
+          "data" => $convocatoria
       ], 200);
     }
 
