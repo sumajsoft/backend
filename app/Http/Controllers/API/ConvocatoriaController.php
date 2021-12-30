@@ -29,8 +29,7 @@ class ConvocatoriaController extends Controller
         return response()->json($convocatoria, 200);
 
     }
-     
-     
+          
      /**
         * @return \Illuminate\Http\Response
         * @param  int  $id
@@ -42,6 +41,17 @@ class ConvocatoriaController extends Controller
       return response()->json([
         "publicada" => True
       ]);
+    }
+
+    public function publicadas(){
+      $convocatoria = \DB::table('convocatoria')//->select('titulo','codigo','semestre','pdfPath')
+                        ->whereNotNull('fechaPublicacion')
+                        ->select('titulo','codigo','semestre','pdfPath','fechaPublicacion')
+                        ->orderBy('created_at','DESC')
+                        ->get();
+        return response()->json([
+          'data' => $convocatoria
+        ]);
     }
 
 
