@@ -17,18 +17,34 @@ class ConvocatoriaController extends Controller
      */
     public function index(){
        return Convocatoria::all();
+       //return Convocatoria::paginate();
     }
 
     public function nopublicadas(){
       $convocatoria = \DB::table('convocatoria')//->select('titulo','codigo','semestre','pdfPath')
                         ->where('fechaPublicacion',null)
-                        ->select('titulo','codigo','semestre','pdfPath')
+                        ->select('titulo','codigo','semestre','pdfPath','fechaPublicacion')
                         ->orderBy('created_at','DESC')
                         ->get();
         return response()->json([
           'data' => $convocatoria
         ]);
     }
+     
+     
+     /**
+        * @return \Illuminate\Http\Response
+        * @param  int  $id
+        * @param  \Illuminate\Http\Request  $request       
+     */
+    public function publicarConvocatoria(Request $request, $id){
+      $convocatoria = Convocatoria::find($id);  
+      $convocatoria->save();
+      return response()->json([
+        "publicada" => True
+      ]);
+    }
+
 
     /**
      * Store a newly created resource in storage.
