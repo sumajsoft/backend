@@ -25,7 +25,7 @@ class GrupoEmpresaController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
-      $nombreCorto = $request->nombreCorto;
+      $nombreCorto = strtolower($request->nombreCorto);
       $geBusc = GrupoEmpresa::where('nombreCorto','=',$nombreCorto)->first();
       if(isset($geBusc)){
         return response()->json([
@@ -34,7 +34,7 @@ class GrupoEmpresaController extends Controller{
       }
       else{
         $grupoEmpresa = new GrupoEmpresa();
-        $grupoEmpresa->nombreCorto = $request->nombreCorto;
+        $grupoEmpresa->nombreCorto = $nombreCorto;
         $grupoEmpresa->nombreLargo = $request->nombreLargo;
         $grupoEmpresa->fechaCreacion= $request->fechaCreacion;
         $grupoEmpresa->tipoSociedad = $request->tipoSociedad;
@@ -118,6 +118,24 @@ class GrupoEmpresaController extends Controller{
     public function getArchivo($id){
       $ge = GrupoEmpresa::find($id);
       return response()->download(storage_path('app/'.$ge->logoPath));
+    }
+
+    /**
+     * Retorna un response con message y verificar si el nombre corto en el req ya existe o no
+     */
+    public function verificarNombreCorto(Request $request){
+      $nombreCorto = strtolower($request->nombreCorto);
+      $buscado = GrupoEmpresa::where('nombreCorto',$nombreCorto)->first();
+      if(isset($buscado)){
+        return response()->json([
+          "message"=>"Nombre corto no disponible"
+        ]);
+      }
+      else{
+        return response()->json([
+          "message"=>"Nombre corto disponible"
+        ]);
+      }
     }
 
     /**

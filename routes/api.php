@@ -5,7 +5,11 @@ use App\Http\Controllers\API\GrupoEmpresaController;
 use App\Http\Controllers\API\PliegoController;
 use App\Models\Convocatoria;
 use App\Models\GrupoEmpresa;
+<<<<<<< HEAD
 use App\Models\Pliegos;
+=======
+use App\Models\User;
+>>>>>>> origin
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +28,33 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('login',function(Request $request){
+  $username = $request->username;
+  $password = $request->password;
+  $user = User::where('username','=',$username)->first();
+  if(isset($user)){
+    if($user->password == $password){
+      $role = $user->role;
+      return response()->json([
+        "message"=>"Inicio de sesion hecho",
+        "username"=>$username,
+        "role"=>$role
+      ]);
+    }
+    else{
+      return response()->json([
+        "message"=>"Contrasenha del usuario ".$username." incorrecta"
+      ]);
+    }
+  }
+  else{
+    return response()->json([
+      "message" => "Nombre de usuario o contrasenha incorrectos"
+    ]);
+  }
+});
+
+
 Route::get('convocatorias', [ConvocatoriaController::class,'index']);
 Route::get('convocatorias/{id}',[ConvocatoriaController::class,'show']);
 Route::get('convocatorias/file/{id}',[ConvocatoriaController::class,'getArchivo']);
@@ -36,6 +67,7 @@ Route::get('grupo-empresas/file/{id}',[GrupoEmpresaController::class,'getArchivo
 Route::post('grupo-empresas',[GrupoEmpresaController::class,'store']);
 Route::post('grupo-empresas/{id}', [GrupoEmpresaController::class,'update']);
 
+<<<<<<< HEAD
 Route::get('convocatorias-no-publicadas', [ConvocatoriaController::class,'nopublicadas']);
 Route::get('convocatoriaspublicar/{id}', [ConvocatoriaController::class,'publicarConvocatoria']);
 Route::get('convocatorias-publicadas', [ConvocatoriaController::class,'publicadas']);
@@ -49,3 +81,6 @@ Route::post('pliegos/{id}', [PliegoController::class,'update']);
 Route::get('pliegos-no-publicados', [PliegoController::class,'pliegosNoPublicados']);
 Route::get('pliegos-publicados', [PliegoController::class,'pliegosPublicados']);
 Route::get('publicarpliegos/{id}', [PliegoController::class,'publicarPliego']);
+=======
+Route::post('verificar-nombreCorto',[GrupoEmpresaController::class,'verificarNombreCorto']);
+>>>>>>> origin
