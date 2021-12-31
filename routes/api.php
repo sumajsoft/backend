@@ -69,9 +69,10 @@ Route::post('grupo-empresas/{id}', [GrupoEmpresaController::class,'update']);
 
 <<<<<<< HEAD
 Route::get('convocatorias-no-publicadas', [ConvocatoriaController::class,'nopublicadas']);
-Route::get('convocatoriaspublicar/{id}', [ConvocatoriaController::class,'publicarConvocatoria']);
+Route::get('convocatorias/publicar/{id}', [ConvocatoriaController::class,'publicarConvocatoria']);
 Route::get('convocatorias-publicadas', [ConvocatoriaController::class,'publicadas']);
 
+<<<<<<< HEAD
 Route::get('pliegos', [PliegoController::class,'index']);
 Route::get('pliegos/{id}',[PliegoController::class,'show']);
 Route::get('pliegos/file/{id}',[PliegoController::class,'getArchivo']);
@@ -84,3 +85,7 @@ Route::get('publicarpliegos/{id}', [PliegoController::class,'publicarPliego']);
 =======
 Route::post('verificar-nombreCorto',[GrupoEmpresaController::class,'verificarNombreCorto']);
 >>>>>>> origin
+=======
+//Route::get('getGrupoEmpresa','\App\Http\Controllers\API\GrupoEmpresaController@getGrupoEmpresa');
+//Route::get('getGrupoEmpresas', [GrupoEmpresaController::class,'getGrupoEmpresa']);
+>>>>>>> 49d2ec75c9e1ea8cbb3a635c9b063ba6a7e24af9
