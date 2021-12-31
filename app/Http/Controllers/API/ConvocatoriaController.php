@@ -7,6 +7,7 @@ use App\Models\Convocatoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ConvocatoriaController extends Controller
 {
@@ -37,11 +38,25 @@ class ConvocatoriaController extends Controller
         * @param  \Illuminate\Http\Request  $request       
      */
     public function publicarConvocatoria(Request $request, $id){
-      $convocatoria = Convocatoria::find($id);  
+      $convocatoria = Convocatoria::find($id);
+//      $properties = array("titulo", "codigo", "semestre", "gestion", "pdfPath");
+      $properties = array("titulo");
+      foreach ($properties as &$item) {
+          error_log('$item');
+          error_log($convocatoria[$item]);
+          if (is_null($convocatoria[$item])) {
+            return response()->json([
+               'message' => "no se puede publicar esta convocatoria, se requiere el dato: '{$item}'"
+            ], 400);
+          }
+      }
+      $now = Carbon::now('UTC');
+      $convocatoria->fechaPublicacion= $now->toDateTimeString();
       $convocatoria->save();
       return response()->json([
-        "publicada" => True
-      ]);
+        "message" => 'se ha publicado una convocatoria',
+          "data" => $convocatoria
+      ], 200);
     }
 
     public function publicadas(){
