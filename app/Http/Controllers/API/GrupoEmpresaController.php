@@ -38,6 +38,7 @@ class GrupoEmpresaController extends Controller{
         $grupoEmpresa->nombreLargo = $request->nombreLargo;
         $grupoEmpresa->fechaCreacion= $request->fechaCreacion;
         $grupoEmpresa->tipoSociedad = $request->tipoSociedad;
+        $grupoEmpresa->convocatoriaId = $request->convocatoriaId;
         $logo = $request->file('archivo');
         if($logo !== null){
           $path = $logo->store('public/files');

@@ -60,7 +60,7 @@ class ConvocatoriaController extends Controller
     public function publicadas(){
       $convocatoria = \DB::table('convocatoria')//->select('titulo','codigo','semestre','pdfPath')
                         ->whereNotNull('fechaPublicacion')
-                        ->select('titulo','codigo','semestre','pdfPath','fechaPublicacion')
+//                        ->select('titulo','codigo','semestre','pdfPath','fechaPublicacion')
                         ->orderBy('created_at','DESC')
                         ->get();
         return response()->json([
