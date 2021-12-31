@@ -20,7 +20,6 @@ class ConvocatoriaController extends Controller
        return Convocatoria::all();
        //return Convocatoria::paginate();
     }
-<<<<<<< HEAD
 
     public function nopublicadas(){
       $convocatoria = \DB::table('convocatoria')//->select('titulo','codigo','semestre','pdfPath')
@@ -70,9 +69,6 @@ class ConvocatoriaController extends Controller
     }
 
 
-=======
-    
->>>>>>> origin
     /**
      * Store a newly created resource in storage.
      *

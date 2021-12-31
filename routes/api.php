@@ -5,11 +5,8 @@ use App\Http\Controllers\API\GrupoEmpresaController;
 use App\Http\Controllers\API\PliegoController;
 use App\Models\Convocatoria;
 use App\Models\GrupoEmpresa;
-<<<<<<< HEAD
 use App\Models\Pliegos;
-=======
 use App\Models\User;
->>>>>>> origin
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -67,12 +64,10 @@ Route::get('grupo-empresas/file/{id}',[GrupoEmpresaController::class,'getArchivo
 Route::post('grupo-empresas',[GrupoEmpresaController::class,'store']);
 Route::post('grupo-empresas/{id}', [GrupoEmpresaController::class,'update']);
 
-<<<<<<< HEAD
 Route::get('convocatorias-no-publicadas', [ConvocatoriaController::class,'nopublicadas']);
 Route::get('convocatorias/publicar/{id}', [ConvocatoriaController::class,'publicarConvocatoria']);
 Route::get('convocatorias-publicadas', [ConvocatoriaController::class,'publicadas']);
 
-<<<<<<< HEAD
 Route::get('pliegos', [PliegoController::class,'index']);
 Route::get('pliegos/{id}',[PliegoController::class,'show']);
 Route::get('pliegos/file/{id}',[PliegoController::class,'getArchivo']);
@@ -82,10 +77,6 @@ Route::post('pliegos/{id}', [PliegoController::class,'update']);
 Route::get('pliegos-no-publicados', [PliegoController::class,'pliegosNoPublicados']);
 Route::get('pliegos-publicados', [PliegoController::class,'pliegosPublicados']);
 Route::get('publicarpliegos/{id}', [PliegoController::class,'publicarPliego']);
-=======
 Route::post('verificar-nombreCorto',[GrupoEmpresaController::class,'verificarNombreCorto']);
->>>>>>> origin
-=======
 //Route::get('getGrupoEmpresa','\App\Http\Controllers\API\GrupoEmpresaController@getGrupoEmpresa');
 //Route::get('getGrupoEmpresas', [GrupoEmpresaController::class,'getGrupoEmpresa']);
->>>>>>> 49d2ec75c9e1ea8cbb3a635c9b063ba6a7e24af9
