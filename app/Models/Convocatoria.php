@@ -10,5 +10,5 @@ class Convocatoria extends Model
     use HasFactory;
 
     protected $table = 'convocatoria';
-    protected $hidden = ['created_at','updated_at'];
+    //protected $hidden = ['created_at','updated_at'];
 }

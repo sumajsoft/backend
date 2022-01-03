@@ -76,7 +76,7 @@ Route::post('pliegos/{id}', [PliegoController::class,'update']);
 
 Route::get('pliegos-no-publicados', [PliegoController::class,'pliegosNoPublicados']);
 Route::get('pliegos-publicados', [PliegoController::class,'pliegosPublicados']);
-Route::get('publicarpliegos/{id}', [PliegoController::class,'publicarPliego']);
+Route::get('pliegos/publicar/{id}', [PliegoController::class,'publicarPliego']);
 Route::post('verificar-nombreCorto',[GrupoEmpresaController::class,'verificarNombreCorto']);
 //Route::get('getGrupoEmpresa','\App\Http\Controllers\API\GrupoEmpresaController@getGrupoEmpresa');
 //Route::get('getGrupoEmpresas', [GrupoEmpresaController::class,'getGrupoEmpresa']);

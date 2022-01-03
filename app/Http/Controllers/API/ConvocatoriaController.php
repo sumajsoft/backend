@@ -37,8 +37,8 @@ class ConvocatoriaController extends Controller
      */
     public function publicarConvocatoria(Request $request, $id){
       $convocatoria = Convocatoria::find($id);
-//      $properties = array("titulo", "codigo", "semestre", "gestion", "pdfPath");
-      $properties = array("titulo");
+      $properties = array("titulo", "codigo", "semestre", "gestion", "pdfPath");
+//      $properties = array("titulo");
       foreach ($properties as &$item) {
           error_log('$item');
           error_log($convocatoria[$item]);

@@ -9,6 +9,6 @@ class Pliego extends Model
 {
     use HasFactory;
 
-    protected $table = 'convocatoria';
+    protected $table = 'pliego';
     protected $hidden = ['created_at','updated_at'];
 }

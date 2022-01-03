@@ -48,9 +48,18 @@ class PliegoController extends Controller
     }
 
     public function pliegosNoPublicados(){
-        $pliego = \DB::table('pliegos')
+        $pliego = \DB::table('pliego')
                           ->where('fechaPublicacion',null)
-                          ->select('titulo','codigo','semestre','pdfPath','fechaPublicacion')
+//                          ->select('titulo','codigo','semestre','pdfPath','fechaPublicacion')
+                          ->orderBy('created_at','DESC')
+                           ->paginate(10);
+        return response()->json($pliego, 200);
+      }
+
+      public function pliegosPublicados(){
+        $pliego = \DB::table('pliego')
+                          ->whereNotNull('fechaPublicacion')
+//                          ->select('titulo','codigo','semestre','pdfPath','fechaPublicacion')
                           ->orderBy('created_at','DESC')
                           ->get();
           return response()->json([
@@ -58,24 +67,13 @@ class PliegoController extends Controller
           ]);
       }
 
-      public function pliegosPublicados(){
-        $pliego = \DB::table('pliegos')
-                          ->whereNotNull('fechaPublicacion')
-                          ->select('titulo','codigo','semestre','pdfPath','fechaPublicacion')
-                          ->orderBy('created_at','DESC')
-                          ->get();
-          return response()->json([
-            'data' => $pliego
-          ]);
-      }
-            
        /**
           * @return \Illuminate\Http\Response
           * @param  int  $id
-          * @param  \Illuminate\Http\Request  $request       
+          * @param  \Illuminate\Http\Request  $request
        */
       /*public function publicarPliego(Request $request, $id){
-        $pliego = Pliego::find($id);  
+        $pliego = Pliego::find($id);
         $pliego->save();
         return response()->json([
           "publicado" => True
@@ -85,9 +83,9 @@ class PliegoController extends Controller
       /**
         * @return \Illuminate\Http\Response
         * @param  int  $id
-        * @param  \Illuminate\Http\Request  $request       
+        * @param  \Illuminate\Http\Request  $request
      */
-  
+
       public function publicarPliego(Request $request, $id){
         $pliego = Pliego::find($id);
         $properties = array("titulo");
@@ -108,8 +106,8 @@ class PliegoController extends Controller
             "data" => $pliego
         ], 200);
       }
-  
-  
+
+
 
     /**
      * Display the specified resource.
